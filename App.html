@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #1f2937, #374151);
+            color: white;
+            min-height: 100vh;
+        }
+
+        h4 {
+          color: #19191a;
+          font: 800;
+          font-size: 1.9em;
+          margin-top: 3px;
+          margin-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 50px;
+            font-size: 1.3em;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .main-title {
+            font-size: 3em;
+            margin-bottom: 10px;
+            opacity: 0;
+            transform: translateY(-50px);
+            animation: fadeIn 0.5s forwards;
+        }
+
+        .sub-title {
+            font-size: 1.5em;
+            color: #9CA3AF;
+            margin-bottom: 30px;
+            opacity: 0;
+            transform: translateY(-30px);
+            animation: fadeIn 0.7s forwards;
+        }
+
+        .section-title {
+            font-size: 1.75em;
+            margin-bottom: 15px;
+        }
+
+        .section-content {
+            color: #9CA3AF;
+            line-height: 1.6;
+        }
+
+        .skills-list {
+            display: block;
+        }
+
+        .skill {
+            display: block;
+            font-size: 2em; /* Increase font size by approximately 200% */
+            margin-top: 20px; /* Added more space between each skill */
+        }
+
+        .progress-bar {
+            background-color: #19191a62;
+            height: 10px;
+            border-radius: 2px;
+            margin-top: 15px;
+        }
+
+        .progress-fill {
+            background-color: rgba(25, 25, 25, 0.492);
+            height: 10px;
+            border-radius: 2px;
+        }
+
+        .projects-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Two columns, each taking 1 fraction of available space */
+        gap: 20px; /* Space between the projects */
+        }
+
+        .project {
+            padding: 25px;
+            background-color: #01000e38;
+            border-color: rgb(255, 255, 255);
+            border-radius: 10px;
+            transition: transform 0.2s ease-in-out;
+            margin-bottom: 20px;
+        }
+
+        .contact-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .contact-btn {
+            background-color: transparent;
+            border: 1px solid #9CA3AF;
+            padding: 10px;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .contact-btn:hover {
+            background-color: #4B5563;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="text-center">
+            <h1 class="main-title">Exil_S</h1>
+            <h2 class="sub-title">Unity Developer & Game Designer</h2>
+        </header>
+
+        <section class="about-section">
+            <h3 class="section-title">About Me</h3>
+            <p class="section-content">
+                I'm a passionate Unity developer with 4 years of experience in creating immersive games and interactive experiences. 
+                My expertise spans across various platforms including mobile, PC, and VR/AR. I love bringing ideas to life and 
+                pushing the boundaries of what's possible in game development.
+            </p>
+        </section>
+
+        <section class="skills-section">
+            <h3 class="section-title">Skills</h3>
+            <div id="skills-list" class="skills-list"></div>
+        </section>
+
+        <section class="projects-section">
+            <h3 class="section-title">Projects</h3>
+            <div id="projects-list" class="projects-list"></div>
+        </section>
+
+        <section class="contact-section text-center">
+            <h3 class="section-title">Get in Touch</h3>
+            <div class="contact-buttons">
+                <button id="itch-button" class="contact-btn">Itch</button>
+                <button id="github-button" class="contact-btn">Github</button>
+                <button id="twitter-button " class="contact-btn">Twitter</button>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const skills = [
+                { name: 'Unity', level: 90 },
+                { name: 'C#', level: 85 },
+                { name: '3D Modeling', level: 40 },
+                { name: 'Game Design', level: 60 },
+                { name: 'AR/VR Development', level: 80 },
+            ];
+
+            const projects = [
+                { name: 'Specters Call', description: 'A Gamble Based Horror Game', url: 'https://xxexil-sxx.itch.io/specters-call'},
+                {name: 'Void Hopper', description: 'A Procedual Platformer', url: 'https://xxexil-sxx.itch.io/void-hopper'}
+            ];
+
+            const skillsList = document.getElementById('skills-list');
+            const projectsList = document.getElementById('projects-list');
+
+            // Populate skills
+            skills.forEach(skill => {
+                const skillElement = document.createElement('div');
+                skillElement.innerHTML = `
+                    <div class="skill">
+                        <span>${skill.name}</span>
+                        <span>${skill.level}%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: ${skill.level}%;"></div>
+                    </div>
+                `;
+                skillsList.appendChild(skillElement);
+            });
+
+            // Populate projects
+            projects.forEach(project => {
+                const projectElement = document.createElement('div');
+                projectElement.addEventListener('click', () => {
+                    window.location.href = project.url;
+                });
+                projectElement.classList.add('project');
+                projectElement.innerHTML = `
+                    <h4>${project.name}</h4>
+                    <p>${project.description}</p>
+                `;
+                projectElement.addEventListener('mouseover', () => {
+                    projectElement.style.transform = 'scale(1.05)';
+                });
+                projectElement.addEventListener('mouseout', () => {
+                    projectElement.style.transform = 'scale(1)';
+                });
+                projectsList.appendChild(projectElement);
+            });
+        });
+    </script>
+</body>
+</html>
